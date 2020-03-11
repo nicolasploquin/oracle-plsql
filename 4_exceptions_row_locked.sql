@@ -25,8 +25,11 @@ declare
     mon_exception   exception; 
     
     -- exception code oracle -54
-    row_locked      exception; pragma exception_init ( row_locked, -54 ); 
-    deadlock        exception; pragma exception_init ( deadlock, -60 ); 
+    row_locked      exception; 
+    pragma exception_init ( row_locked, -54 );
+
+    deadlock        exception; 
+    pragma exception_init ( deadlock, -60 ); 
     
 begin
 
@@ -48,5 +51,8 @@ exception
         dbms_output.put_line('verrou ligne pour update');
     when deadlock then
         dbms_output.put_line('verrou table');
+    when others then
+        dbms_output.put_line('autre : ' || sqlcode || sqlerrm);
+
     
 end;
