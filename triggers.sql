@@ -1,14 +1,14 @@
---create sequence c_id
---  start with 200;
+create sequence c_id
+ start with 200;
 
--- Auto-Incr�ment  
+-- Auto-Incrément  
 create or replace trigger ai_atelier
   before insert 
   on atelier for each row
   when (new.no_atel is null)
 begin
   select c_id.nextval into :new.no_atel from dual;
-  dbms_output.put_line('Cl� autoincr�ment� : ' || :new.no_atel);
+  dbms_output.put_line('Clé autoincrémenté : ' || :new.no_atel);
 end;
 
 create or replace trigger primary_ai

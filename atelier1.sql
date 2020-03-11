@@ -1,9 +1,9 @@
-set serveroutput on;
+-- set serveroutput on;
 begin
 
--- atelier 1.2a
+-- Atelier 1.A - AdhÃ©rent le plus jeune de la ville de Nantes
+dbms_output.put_line('1.A - AdhÃ©rent le plus jeune de la ville de Nantes');
 declare
-  -- recherche de l'adhérent le plus jeune de la ville de nantes
   maxdate date;
   vnom VARCHAR2(30000);
 begin
@@ -15,12 +15,12 @@ begin
     where date_naissance = maxdate
     and ville= 'NANTES';
     
-  dbms_output.put_line(vnom||' est le plus jeune adhérent de Nantes');
+  dbms_output.put_line(vnom||' est le plus jeune adhÃ©rent de Nantes');
 end;
 
 
--- atelier 1.A
--- Nombre d'inscrits par atelier
+-- Atelier 1.B - Nombre d'inscrits par atelier
+dbms_output.put_line('1.B - (for) Nombre d''inscrits par atelier');
 declare
   v_eff int;
   v_intitule atelier.intitule%type;
@@ -36,17 +36,14 @@ begin
       where no_atel = v_no_atel
       group by intitule;
       
-    dbms_output.put_line(v_eff || ' inscrits à l''atelier ' || v_intitule);
+    dbms_output.put_line(v_eff || ' inscrits Ã  l''atelier ' || v_intitule);
 
-      
   end loop;
-  
-    
-    
-    
+
 end;
--- atelier 1.B
--- Nombre d'inscrits par ville
+
+-- Atelier 1.B - Nombre d'inscrits par atelier
+dbms_output.put_line('1.B - (cursor) Nombre d''inscrits par atelier');
 declare
   cursor c_effectif is
     select intitule, count(*) effectif
@@ -58,7 +55,7 @@ begin
   
   
   for v_effectif in c_effectif loop      
-    dbms_output.put_line(v_effectif.effectif || ' inscrits à l''atelier ' || v_effectif.intitule);
+    dbms_output.put_line(v_effectif.effectif || ' inscrits Ã  l''atelier ' || v_effectif.intitule);
 
       
   end loop;
@@ -84,7 +81,7 @@ begin
     group by intitule;
  
   for i in 1..v_intitule.count loop      
-    dbms_output.put_line(v_eff(i) || ' inscrits à l''atelier ' || v_intitule(i));  
+    dbms_output.put_line(v_eff(i) || ' inscrits Ã  l''atelier ' || v_intitule(i));  
   end loop;
   
 end;

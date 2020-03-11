@@ -9,7 +9,7 @@ declare
                 inner join atelier using (no_atel)
             where jour = 'DI';
     
-    -- Activité avec le moins d'inscrits pour un atelier
+    -- ActivitÃ© avec le moins d'inscrits pour un atelier
     cursor c_activites(p_no_atel atelier.no_atel%type) is 
         select jour, count(no_insc) effectif
             from activite 
@@ -21,7 +21,7 @@ declare
             
     v_activite  c_activites%rowtype;
     
-    -- exception personnalisée, déclenchement par raise ...
+    -- exception personnalisÃ©e, dÃ©clenchement par raise ...
     mon_exception   exception; 
     
     -- exception code oracle -54
@@ -39,9 +39,9 @@ begin
     
 exception
     when no_data_found then
-        dbms_output.put_line('Données non trouvées');
+        dbms_output.put_line('DonnÃ©es non trouvÃ©es');
     when too_many_rows then
-        dbms_output.put_line('Doublons trouvés');
+        dbms_output.put_line('Doublons trouvÃ©s');
     when mon_exception then
         dbms_output.put_line('Mon exception');
     when row_locked then

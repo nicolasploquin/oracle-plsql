@@ -13,7 +13,7 @@ create or replace package body eni as
     return integer is
   begin
     if date_1 > date_2 then 
-      raise_application_error(-20001, 'La première date doit précéder la deuxième.');
+      raise_application_error(-20001, 'La premiÃ¨re date doit prÃ©cÃ©der la deuxiÃ¨me.');
     end if;
     return floor(months_between(date_2,date_1)/12);
   end;

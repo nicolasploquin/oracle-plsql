@@ -1,4 +1,4 @@
-set serveroutput on;
+-- set serveroutput on;
 begin
 
 -- atelier 2.1
@@ -24,12 +24,12 @@ begin
   for v_atelier in c_atelier loop
     for v_activite in c_activite(v_atelier.no_atel) loop
       if v_activite.effectif = 0 then
-        dbms_output.put_line('L''activté ' || v_atelier.intitule 
+        dbms_output.put_line('L''activtÃ© ' || v_atelier.intitule 
                           || ' du ' || v_activite.jour 
-                          || ' sera supprimée car il n''y a pas d''inscrits.');
-        delete from activite 
-          where no_atel = v_atelier.no_atel
-            and jour = v_activite.jour;
+                          || ' sera supprimÃ©e car il n''y a pas d''inscrits.');
+        -- delete from activite 
+        --   where no_atel = v_atelier.no_atel
+        --     and jour = v_activite.jour;
       end if;
   
     end loop;
@@ -67,13 +67,13 @@ begin
         fetch c_jour into v_jour;
         
         if c_jour%found then
-            dbms_output.put_line('Les inscrits à l''atelier ' || v_inscription.no_atel 
-                                || ' du dimanche sont transférés dans le groupe du ' || v_jour.jour 
+            dbms_output.put_line('Les inscrits Ã  l''atelier ' || v_inscription.no_atel 
+                                || ' du dimanche sont transfÃ©rÃ©s dans le groupe du ' || v_jour.jour 
                                 || '.');
                                 
-            update inscription
-              set jour = v_jour.jour
-              where current of c_inscription;
+            -- update inscription
+            --   set jour = v_jour.jour
+            --   where current of c_inscription;
         else
             dbms_output.put_line('Il n''y a pas d''inscrits le dimanche.');
         end if;
@@ -81,7 +81,7 @@ begin
     close c_jour;
 
     
-    delete from activite where jour = 'DI';
+    -- delete from activite where jour = 'DI';
   
   end loop;
   
@@ -116,8 +116,8 @@ begin
     open c_jour_min(v_atel_di.no_atel);
     fetch c_jour_min into v_jour;
     
-    dbms_output.put_line('Les inscrits à l''atelier ' || v_atel_di.no_atel 
-                        || ' du dimanche sont transférés dans le groupe du ' || v_jour.jour 
+    dbms_output.put_line('Les inscrits Ã  l''atelier ' || v_atel_di.no_atel 
+                        || ' du dimanche sont transfÃ©rÃ©s dans le groupe du ' || v_jour.jour 
                         || '.');
                         
     update inscription
@@ -166,7 +166,7 @@ begin
         open c_insc(v_no_atel.no_atel, v_ville.ville);
         fetch c_insc into v_insc;        
         if c_insc%notfound then
-          dbms_output.put_line('Il n''y a pas d''inscrits en '||v_no_atel.intitule||' à '||v_ville.ville||'.');
+          dbms_output.put_line('Il n''y a pas d''inscrits en '||v_no_atel.intitule||' Ã  '||v_ville.ville||'.');
         end if;
         close c_insc;
       end loop;
@@ -192,10 +192,10 @@ end;
 
 -- atelier 2.3
 create or replace procedure augmentation
-  -- augmentation du cout heure des animateurs en fonction des règles de
+  -- augmentation du cout heure des animateurs en fonction des rï¿½gles de
   -- gestion suivantes :
   -- Directeur : taux=1%
-  -- cadre , addition des taux de la façon suivante
+  -- cadre , addition des taux de la faï¿½on suivante
   --      si reponsable de plus de 3 animateurs : taux=2% sinon taux=1%
   --      si anime un atelier taux=1% sinon 0%
   -- Agent, si anime 1 atelier taux=2% sinon taux=0%
